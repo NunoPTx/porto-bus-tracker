@@ -7,13 +7,15 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # <--- THIS IS REQUIRED
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4 # Updated from v2 to v4
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5 # Updated from v2 to v5
         with:
-          python-version: '3.x'
+          python-version: '3.9'
       - name: Install dependencies
         run: pip install requests
       - name: Run script
