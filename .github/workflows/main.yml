@@ -1,0 +1,27 @@
+name: Hourly Bus Check
+on:
+  schedule:
+    - cron: '0 * * * *' # This runs it every hour on the hour
+  workflow_dispatch: # This lets you run it manually to test
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Install dependencies
+        run: pip install requests
+      - name: Run script
+        run: python tracker.py
+      - name: Save results
+        run: |
+          git config --global user.name 'BusTrackerBot'
+          git config --global user.email 'bot@noreply.github.com'
+          git add roster.json
+          git commit -m "Update bus roster" || exit 0
+          git push
