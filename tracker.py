@@ -12,7 +12,6 @@ def run_tracker():
     except:
         pass
 
-
     try:
         response = requests.get(URL, timeout=30)
         response.raise_for_status()
