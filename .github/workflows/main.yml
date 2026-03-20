@@ -1,19 +1,19 @@
 name: Hourly Bus Check
 on:
   schedule:
-    - cron: '*/5 * * * *' # This runs it every hour on the hour
-  workflow_dispatch: # This lets you run it manually to test
+    - cron: '*/5 * * * *'
+  workflow_dispatch: 
 
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write  # <--- THIS IS REQUIRED
+      contents: write  
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4 # Updated from v2 to v4
+        uses: actions/checkout@v4 
       - name: Set up Python
-        uses: actions/setup-python@v5 # Updated from v2 to v5
+        uses: actions/setup-python@v5
         with:
           python-version: '3.9'
       - name: Install dependencies
